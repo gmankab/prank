@@ -26,14 +26,19 @@ def pe():
 
 while True:
     if 'token.txt' in os.listdir('../data'):
-        file = open('token.txt', 'r')
+        file = open(os.path.relpath('../data/token.txt'), 'r')
         TOKEN = file.read()
-        if TOKEN != '':
+        print(f'{TOKEN}')
+        bot = f'https://api.telegram.org/bot{TOKEN}/'
+        if t('getUpdates')['ok']:
             break
+        else:
+            print('incorrect token')
+            pe()
+        pass
 
-    file = open('token.txt', 'w')
     print('input token and press enter,',
-          'or create token.txt in prank/data folder, input token there and press enter',
+          'or create token.txt in prank/data folder, put token there and press enter',
           sep='\n')
     TOKEN = input()
     if TOKEN != '':
